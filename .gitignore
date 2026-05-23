@@ -1,0 +1,22 @@
+# Node modules
+frontend/node_modules/
+node_modules/
+
+# Python Virtual Environments
+backend/venv/
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Frontend Build Output
+frontend/dist/
+dist/
+
+# Misc
+.DS_Store

@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Global Resets & Base ──────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #050a18;
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0d1424; }
+::-webkit-scrollbar-thumb { background: #1e2d4a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00e5ff33; }
+
+/* ─── Custom Component Classes ──────────────────────────────────────────── */
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(13, 20, 36, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 255, 0.1);
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.08);
+}
+
+/* Neon button */
+.btn-cyber {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2563eb, #00e5ff20);
+  border: 1px solid #00e5ff40;
+  color: #00e5ff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,0.15), transparent);
+  transition: left 0.5s ease;
+}
+.btn-cyber:hover::before { left: 100%; }
+.btn-cyber:hover {
+  border-color: #00e5ff;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.35);
+  color: #fff;
+}
+
+/* Cyber grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glow text */
+.text-glow {
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.7), 0 0 20px rgba(0, 229, 255, 0.3);
+}
+.text-glow-green {
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+}
+.text-glow-purple {
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.7);
+}
+
+/* Terminal-style text */
+.terminal-text {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: #00e5ff;
+}
+
+/* Animated scan line overlay */
+.scan-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00e5ff60, transparent);
+  animation: scanLine 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanLine {
+  0%   { top: 0%; opacity: 1; }
+  90%  { opacity: 0.3; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Progress bar with glow */
+.progress-bar-glow {
+  background: linear-gradient(90deg, #2563eb, #00e5ff);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  border-radius: 4px;
+  height: 6px;
+  transition: width 0.6s ease;
+}
+
+/* Fade-up animation */
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* Hex pattern overlay */
+.hex-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L55 20 L55 45 L30 55 L5 45 L5 20 Z' fill='none' stroke='rgba(0,229,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* Image preview container */
+.image-preview-container {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #1e2d4a;
+  background: #050a18;
+  transition: border-color 0.3s ease;
+}
+.image-preview-container:hover {
+  border-color: #00e5ff40;
+}
+
+/* Tooltip */
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0d1424;
+  border: 1px solid #00e5ff30;
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Rotating border animation */
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.rotating-border {
+  animation: rotateBorder 4s linear infinite;
+}
+
+/* Status dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
